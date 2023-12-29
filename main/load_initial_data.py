@@ -4,10 +4,10 @@ from dotenv import load_dotenv
 import re
 
 load_dotenv()
-CSV_PATH = os.getenv("CSV_PATH")
+ORIGINAL = os.getenv("ORIGINAL_CSV_PATH")
 
 # Normalización de los datos
-filepath = CSV_PATH
+filepath = ORIGINAL
 file = pd.read_csv(filepath, low_memory=False, na_values='NaN', keep_default_na=False)
 
 
@@ -34,5 +34,6 @@ for i, row in file.iterrows():
         continue
 
 
+file.to_csv(os.getenv("CSV_PATH"), index=False)
 def get_file():
     return file

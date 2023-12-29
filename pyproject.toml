@@ -1,0 +1,16 @@
+[project]
+name = "santa-fe-school-finder"
+version = "0.0.1"
+authors = [
+  { name="Joaquin Gomez", email="joagomez.dev@gmail.com" }
+]
+description = "Load school data by School Number."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/Joagz/santa-fe-school-finder"
