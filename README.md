@@ -4,19 +4,21 @@ Terminal app to find schools by their 'identifier' or number;
 
 ```python
 import typer
-from load_initial_data import get_file
+import pandas as pd
+
+file = pd.read_csv("./data/out.csv", low_memory=False, na_values='NaN', keep_default_na=False)
 
 def main():
     while True :
         print("Buscar por número: ")
         nombre = input()
         search(nombre)
+    print("Toca para cerrar")
 
 
 def search(nro):
-    file = get_file()
-
     table = file.loc[file["nro"] == nro].head()
+    table = table[["sector", "localidad", "nombre", "teléfono"]]
     print(table.to_markdown())
 
 if __name__ == "__main__":
@@ -32,10 +34,10 @@ from dotenv import load_dotenv
 import re
 
 load_dotenv()
-CSV_PATH = os.getenv("CSV_PATH")
+ORIGINAL = os.getenv("ORIGINAL_CSV_PATH")
 
 # Normalización de los datos
-filepath = CSV_PATH
+filepath = ORIGINAL
 file = pd.read_csv(filepath, low_memory=False, na_values='NaN', keep_default_na=False)
 
 
@@ -62,8 +64,10 @@ for i, row in file.iterrows():
         continue
 
 
+file.to_csv(os.getenv("CSV_PATH"), index=False)
 def get_file():
     return file
+
 ```
 
 This one takes the CSV file downloaded from the government's dataset, filters it and extracts each school number.
